@@ -5,13 +5,13 @@ namespace Everest;
 use App\Classes\Theme;
 
 use App\Facades\Hook;
+use App\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Forms\Components\TinyEditor;
 use Filament\Forms\Components\ColorPicker;
 use luizbills\CSS_Generator\Generator as CSSGenerator;
 use matthieumastadenis\couleur\ColorFactory;
 use matthieumastadenis\couleur\ColorSpace;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Builder;
