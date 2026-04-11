@@ -23,9 +23,12 @@
                             <!-- Personal Information -->
                             <div class="sm:col-span-3">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('general.given_name') }} <span class="text-red-500">*</span>
+                                    {{ __('general.given_name') }}
+                                    @if($requiredFields['given_name'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model="given_name" required />
+                                <input type="text"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model="given_name" @if($requiredFields['given_name']) required @endif />
                                 @error('given_name')
                                     <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -34,8 +37,11 @@
                             <div class="sm:col-span-3">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
                                     {{ __('general.family_name') }}
+                                    @if($requiredFields['family_name'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model="family_name" />
+                                <input type="text"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model="family_name" @if($requiredFields['family_name']) required @endif />
                                 @error('family_name')
                                     <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -43,20 +49,26 @@
 
                             <div class="sm:col-span-6">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('general.public_name') }}</span>
+                                    {{ __('general.public_name') }}
+                                    @if($requiredFields['public_name'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model="public_name" />
+                                <input type="text"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model="public_name" @if($requiredFields['public_name']) required @endif />
                                 @error('public_name')
-                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                    <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
                                 <p class="text-xs text-gray-500">{{ __('general.public_name_helper') }}</p>
                             </div>
 
                             <div class="sm:col-span-3">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('general.affiliation') }}
+                                    {{ __('general.affiliation') }} 
+                                    @if($requiredFields['affiliation'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model="affiliation" />
+                                <input type="text"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model="affiliation" @if($requiredFields['affiliation']) required @endif />
                                 @error('affiliation')
                                     <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -64,9 +76,12 @@
 
                             <div class="sm:col-span-3">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('general.country') }}
+                                    {{ __('general.country') }} 
+                                    @if($requiredFields['country'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model='country'>
+                                <select
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model='country' @if($requiredFields['country']) required @endif>
                                     <option value="none" selected disabled>{{ __('general.select_country') }}</option>
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->flag . ' ' . $country->name }}</option>
@@ -79,11 +94,14 @@
 
                             <div class="sm:col-span-6">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    {{ __('general.phone') }}</span>
+                                    {{ __('general.phone') }} 
+                                    @if($requiredFields['phone'])<span class="text-red-500">*</span>@endif
                                 </label>
-                                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400" wire:model="phone" />
+                                <input type="tel"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-primary-200 focus:border-primary-400"
+                                    wire:model="phone" @if($requiredFields['phone']) required @endif />
                                 @error('phone')
-                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                    <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
                                 <p class="text-xs text-gray-500 mt-2">{{ __('general.phone_format_international') }}</p>
                             </div>
