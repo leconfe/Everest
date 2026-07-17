@@ -10,5 +10,8 @@
             "name": "Leconfe"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "test": "@php ../../vendor/bin/phpunit -c phpunit.xml"
+    }
 }
