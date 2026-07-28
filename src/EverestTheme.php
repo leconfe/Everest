@@ -112,18 +112,22 @@ class EverestTheme extends Theme
 			$output .= "<link rel='stylesheet' type='text/css' href='$css'/> ";
 
 			if ($appearanceColor = $this->getSetting('appearance_color')) {
-				$oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
-				$css = new CSSGenerator();
-				$css->root_variable('p', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+				try {
+					$oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
+					$css = new CSSGenerator();
+					$css->root_variable('p', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
 
-				$oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
-				$css->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+					$oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
+					$css->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
 
-				$output .= <<<HTML
-					<style>
-						{$css->get_output()}
-					</style>
-				HTML;
+					$output .= <<<HTML
+						<style>
+							{$css->get_output()}
+						</style>
+					HTML;
+				} catch (\Throwable $th) {
+					// Safe fallback
+				}
 			}
 		});
 	}

@@ -10,7 +10,17 @@
             "name": "Leconfe"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^8.1"
+    },
+    "extra": {
+        "leconfe": {
+            "versions": ">=1.5 <1.7",
+            "php": "^8.1",
+            "laravel": "^10.0 || ^13.0",
+            "filament": "^3.1 || ^5.0"
+        }
+    },
     "scripts": {
         "test": "@php ../../vendor/bin/phpunit -c phpunit.xml"
     }
