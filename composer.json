@@ -1,5 +1,6 @@
 {
     "name": "leconfe/everest",
+    "version": "1.3.0",
     "autoload": {
         "psr-4": {
             "Everest\\": "src/"
