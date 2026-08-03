@@ -44,8 +44,7 @@ class EverestTheme extends Theme
 				->label('Upload Header Images')
 				->multiple()
 				->maxFiles(4)
-				->image()
-				->conversion('thumb-xl'),
+				->image(),
 			ColorPicker::make('appearance_color')
 				->regex('/^#?(([a-f0-9]{3}){1,2})$/i')
 				->label(__('general.appearance_color')),
@@ -62,18 +61,22 @@ class EverestTheme extends Theme
 					Builder\Block::make('speakers')
 						->label('Speakers')
 						->icon('heroicon-o-users')
+						->schema([])
 						->maxItems(1),
 					Builder\Block::make('sponsors')
 						->label('Sponsors')
 						->icon('heroicon-o-building-office-2')
+						->schema([])
 						->maxItems(1),
 					Builder\Block::make('partners')
 						->label('Partners')
 						->icon('heroicon-o-building-office')
+						->schema([])
 						->maxItems(1),
 					Builder\Block::make('latest-news')
 						->label('Latest News')
 						->icon('heroicon-o-newspaper')
+						->schema([])
 						->maxItems(1),
 					Builder\Block::make('layouts')
 						->label('Custom Content')
@@ -112,18 +115,22 @@ class EverestTheme extends Theme
 			$output .= "<link rel='stylesheet' type='text/css' href='$css'/> ";
 
 			if ($appearanceColor = $this->getSetting('appearance_color')) {
-				$oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
-				$css = new CSSGenerator();
-				$css->root_variable('p', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+				try {
+					$oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
+					$css = new CSSGenerator();
+					$css->root_variable('p', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
 
-				$oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
-				$css->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+					$oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
+					$css->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
 
-				$output .= <<<HTML
-					<style>
-						{$css->get_output()}
-					</style>
-				HTML;
+					$output .= <<<HTML
+						<style>
+							{$css->get_output()}
+						</style>
+					HTML;
+				} catch (\Throwable $th) {
+					// Safe fallback
+				}
 			}
 		});
 	}
